@@ -1,6 +1,8 @@
 # Django settings for microblog project.
 
 import os
+import dj_database_url
+
 # here() gives us file paths from the root of the system to the directory
 # holding the current file.
 here = lambda * x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
@@ -20,15 +22,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'microblog',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'vagrant',
-        'PASSWORD': 'gswd',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+    'default': dj_database_url.config()
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -79,7 +73,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    root("assets")
+    root("assets"),
 )
 
 # List of finder classes that know how to find static files in
@@ -116,7 +110,7 @@ ROOT_URLCONF = 'microblog.urls'
 WSGI_APPLICATION = 'microblog.wsgi.application'
 
 TEMPLATE_DIRS = (
-    root("templates")
+    root("templates"),
 )
 
 DJANGO_APPS = (
